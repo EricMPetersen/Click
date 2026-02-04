@@ -28,11 +28,12 @@
       <img id="imageDisplay" src="./images/bemy-valentine.gif" alt="Cute kitten with flowers" class="rounded-md h-[300px]" style="object-fit: cover;" />
       <h2 id="valentineQuestion" class="text-4xl font-bold italic text-[#bd1e59] my-4">Will you be my Valentine MY BABYBOO?</h2>
       
-      <div class="flex gap-4 pt-[20px] items-center" id="responseButtons">
+      <div class="flex flex-row justify-center items-center gap-4 pt-[20px]" id="responseButtons">
         <button id="yesButton"
           class="bounce2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-[20px] font-medium hover:bg-green-400 min-h-12 min-w-[75px] px-4 py-2 bg-green-500 text-white transition">
           Yes
         </button>
+        
         <button id="noButton"
           class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-[20px] font-medium transition h-12 min-w-[75px] w-auto px-4 py-2 bg-red-500 text-white">
           No
@@ -51,19 +52,20 @@
   const responseButtons = document.getElementById('responseButtons');
 
   function moveNoButton() {
-    // Set to absolute only when the movement starts
+    // 1. Calculate the new random position first
+    const padding = 20;
+    const maxX = window.innerWidth - noButton.offsetWidth - padding;
+    const maxY = window.innerHeight - noButton.offsetHeight - padding;
+    
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
+
+    // 2. Apply absolute position ONLY when moving
     if (noButton.style.position !== 'absolute') {
       noButton.style.position = 'absolute';
     }
 
-    const padding = 20;
-    // Calculate boundaries to keep button on screen
-    const maxX = window.innerWidth - noButton.offsetWidth - padding;
-    const maxY = window.innerHeight - noButton.offsetHeight - padding;
-
-    const randomX = Math.random() * maxX;
-    const randomY = Math.random() * maxY;
-
+    // 3. Apply the coordinates
     noButton.style.left = `${randomX}px`;
     noButton.style.top = `${randomY}px`;
   }
@@ -73,7 +75,7 @@
 
   // Mobile: dodge touch
   noButton.addEventListener('touchstart', (e) => {
-    e.preventDefault(); // Prevents accidental clicks on mobile while dodging
+    e.preventDefault(); 
     moveNoButton();
   });
 
