@@ -55,8 +55,14 @@
   const valentineQuestion = document.getElementById('valentineQuestion');
   const responseButtons = document.getElementById('responseButtons');
 
-  // Make No button position absolute so it can move
+  // Capture initial position BEFORE making it absolute
+  const noRect = noButton.getBoundingClientRect();
+  const offsetX = noRect.left + window.scrollX;
+  const offsetY = noRect.top + window.scrollY;
+
   noButton.style.position = 'absolute';
+  noButton.style.left = `${offsetX}px`;
+  noButton.style.top = `${offsetY}px`;
 
   function moveNoButton() {
     const padding = 20;
@@ -70,22 +76,23 @@
     noButton.style.top = `${randomY}px`;
   }
 
-  // Desktop: dodge mouse
+  // Desktop dodge
   noButton.addEventListener('mouseenter', moveNoButton);
 
-  // Mobile: dodge touch
+  // Mobile dodge
   noButton.addEventListener('touchstart', moveNoButton);
 
   yesButton.addEventListener('click', () => {
     imageDisplay.src = './images/image7.gif';
-    valentineQuestion.textContent = 'WOOHOOOOO';
+    valentineQuestion.textContent = 'WOOHOOOOOOOOOO';
     responseButtons.style.display = 'none';
     confetti();
   });
-</script>  
+</script>
 </body>
 
 </html>
+
 
 
 
